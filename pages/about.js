@@ -1,9 +1,9 @@
-import Seo from './Seo';
+import Helmet from './Helmet';
 
 export default function about() {
   return (
     <div>
-      <Seo title='About' />
+      <Helmet title='About' />
     </div>
   );
 }
