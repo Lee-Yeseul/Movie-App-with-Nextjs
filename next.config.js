@@ -1,17 +1,22 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+const API_KEY = '5fffd35338a11175cd1be7a54e8333f0';
 
+module.exports = {
+  reactStrictMode: true,
   async redirects() {
     return [
       {
-        source: '/contact',
-        destination: '/form',
+        source: '/old-blog/:path*',
+        destination: '/new-sexy-blog/:path*',
         permanent: false,
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/movies',
+        destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
+      },
+    ];
+  },
 };
-
-module.exports = nextConfig;

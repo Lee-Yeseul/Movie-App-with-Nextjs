@@ -1,4 +1,4 @@
-import Helmet from './Helmet';
+import Helmet from '../components/Helmet';
 
 export default function about() {
   return (
