@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-export default function Detail({ params }) {
+export default function Detail({ params, results }) {
   const router = useRouter();
   // console.log(router);
   const [title, id] = params;
@@ -12,7 +12,11 @@ export default function Detail({ params }) {
 }
 
 export function getServerSideProps({ params: { params } }) {
+  const { results } = await (
+    await axios.get(`http://localhost:3000/api/movies/${params.id}`)
+  ).data;
+
   return {
-    props: { params },
+    props: { params, results },
   };
 }
