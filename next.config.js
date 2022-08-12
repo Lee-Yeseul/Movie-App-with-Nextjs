@@ -2,6 +2,9 @@ const API_KEY = '5fffd35338a11175cd1be7a54e8333f0';
 
 module.exports = {
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   async redirects() {
     return [
       {
