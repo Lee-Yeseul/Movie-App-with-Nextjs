@@ -2,18 +2,21 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Helmet from '../components/Helmet';
+import Title from '../components/common/Title';
 
 export default function Home({ results }) {
   const router = useRouter();
   const onClick = (id, title) => {
     router.push(`/movies/${title}/${id}`);
   };
+
   return (
-    <div>
+    <div className='container'>
       <Helmet title='Home' />
       {results?.map((movie) => {
         return (
           <div
+            className='movie'
             key={movie.id}
             onClick={() => {
               onClick(movie.id, movie.original_title);
@@ -21,7 +24,7 @@ export default function Home({ results }) {
           >
             <Link href={`movies/${movie.original_title}/${movie.id}`}>
               <a>
-                <div>{movie.original_title}</div>
+                <Title props={movie.original_title} />
               </a>
             </Link>
             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
