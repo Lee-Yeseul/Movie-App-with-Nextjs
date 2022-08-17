@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Helmet from '../components/Helmet';
 import Title from '../components/common/Title';
+import ImgCard from '../components/common/ImgCard';
 
 export default function Home({ results }) {
   const router = useRouter();
@@ -27,7 +28,9 @@ export default function Home({ results }) {
                 <Title props={movie.original_title} />
               </a>
             </Link>
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+            <ImgCard
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            />
           </div>
         );
       })}
