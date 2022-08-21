@@ -5,6 +5,9 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  env: {
+    BASE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  },
   async redirects() {
     return [
       {
