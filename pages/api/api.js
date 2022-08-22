@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const backendPortNumber = process.env.REACT_APP_SERVER_PORT || 5000;
-
+const portNumber = 3000;
 const hostname =
   typeof window !== 'undefined' && window.location.hostname
     ? window.location.hostname
     : '';
-const serverUrl = 'http://' + hostname + ':' + backendPortNumber + '/api/';
-// const serverUrl = 'https://' + hostname + '/api/';
+
+// const serverUrl = 'http://' + hostname + ':' + portNumber;
+const serverUrl = `http://localhost:3000`;
 
 async function get(endpoint, params = '') {
   console.log(
@@ -17,9 +17,6 @@ async function get(endpoint, params = '') {
 
   return axios.get(serverUrl + endpoint + '/' + params, {
     // JWT 토큰을 헤더에 담아 백엔드 서버에 보냄.
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-    },
   });
 }
 
@@ -30,12 +27,7 @@ async function post(endpoint, data) {
   console.log(`%cPOST 요청: ${serverUrl + endpoint}`, 'color: #296aba;');
   console.log(`%cPOST 요청 데이터: ${bodyData}`, 'color: #296aba;');
 
-  return axios.post(serverUrl + endpoint, bodyData, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-    },
-  });
+  return axios.post(serverUrl + endpoint, bodyData, {});
 }
 
 async function put(endpoint, data) {
@@ -45,51 +37,16 @@ async function put(endpoint, data) {
   console.log(`%cPUT 요청: ${serverUrl + endpoint}`, 'color: #059c4b;');
   console.log(`%cPUT 요청 데이터: ${bodyData}`, 'color: #059c4b;');
 
-  return axios.put(serverUrl + endpoint, bodyData, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-    },
-  });
+  return axios.put(serverUrl + endpoint, bodyData, {});
 }
 
 // 아래 함수명에 관해, delete 단어는 자바스크립트의 reserved 단어이기에,
 // 여기서는 우선 delete 대신 del로 쓰고 아래 export 시에 delete로 alias 함.
 async function del(endpoint, params = '') {
   console.log(`DELETE 요청 ${serverUrl + endpoint + '/' + params}`);
-  return axios.delete(serverUrl + endpoint + '/' + params, {
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-    },
-  });
-}
-
-async function postImg(endpoint, data) {
-  console.log(`%cPOST 요청: ${serverUrl + endpoint}`, 'color: #296aba;');
-  console.log(`%cPOST 요청 데이터: ${data}`, 'color: #296aba;');
-  console.log(data);
-
-  return axios.post(serverUrl + endpoint, data, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-    },
-  });
-}
-
-async function putImg(endpoint, data) {
-  console.log(`%cPOST 요청: ${serverUrl + endpoint}`, 'color: #296aba;');
-  console.log(`%cPOST 요청 데이터: ${data}`, 'color: #296aba;');
-  console.log(data);
-
-  return axios.put(serverUrl + endpoint, data, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-    },
-  });
+  return axios.delete(serverUrl + endpoint + '/' + params, {});
 }
 
 // 아래처럼 export한 후, import * as A 방식으로 가져오면,
 // A.get, A.post 로 쓸 수 있음.
-export { get, post, put, del as delete, postImg, putImg };
+export { get, post, put, del as delete };

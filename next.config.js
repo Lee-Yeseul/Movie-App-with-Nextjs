@@ -5,9 +5,7 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  env: {
-    BASE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-  },
+
   async redirects() {
     return [
       {
@@ -20,7 +18,7 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/api/movies',
+        source: '/api/globalmovies',
         destination: `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`,
       },
       {

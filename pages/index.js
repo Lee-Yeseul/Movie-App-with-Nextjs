@@ -5,6 +5,7 @@ import Helmet from '../components/Helmet';
 import Title from '../components/common/Title';
 import ImgCard from '../components/common/ImgCard';
 import Card from '../components/common/Card';
+import * as API from './api/api';
 
 export default function Home({ results }) {
   const router = useRouter();
@@ -44,9 +45,7 @@ export default function Home({ results }) {
 }
 
 export async function getServerSideProps() {
-  const { results } = await (
-    await axios.get(`${process.env.NEXT_PUBLIC_HOST}/api/globalmovies`)
-  ).data;
+  const { results } = await (await API.get(`/api/globalmovies`)).data;
   return {
     props: {
       results,
