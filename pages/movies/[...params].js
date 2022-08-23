@@ -1,4 +1,4 @@
-import axios from 'axios';
+import * as API from '../api/api';
 
 export default function Detail({ params, data }) {
   const [title, id] = params;
@@ -21,7 +21,7 @@ export default function Detail({ params, data }) {
 
 export async function getServerSideProps({ params: { params } }) {
   const [title, id] = params;
-  const res = await axios.get(`http://localhost:3000/api/movies/${id}`);
+  const res = await API.get(`/api/movies/${id}`);
   const data = res.data;
 
   return {
